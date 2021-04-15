@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>CRUD Users</h1>
+    <br><br>
+    <div class="row justify-content-md-center">
+      <div class="col-md-4">
+        <AddUser />
+      </div>
+      <div class="col-md-7">
+        <UserList />
+      </div>
+    </div><!-- row -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AddUser from './components/user/AddUser.vue'
+import UserList from './components/user/UserList.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    UserList,
+    AddUser
   }
 }
 </script>
