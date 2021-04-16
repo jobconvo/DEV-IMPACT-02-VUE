@@ -24,7 +24,7 @@
             <td>{{ item.email }}</td>
             <td>
               <font-awesome-icon icon="edit" class="link" @click="editItem(item)"/>
-              <font-awesome-icon icon="trash" class="no" />
+              <font-awesome-icon icon="trash" class="no" @click="deleteItem(item)"/>
             </td>
           </tr>
         </tbody>
@@ -111,6 +111,14 @@ export default {
       }).then(() => {
         this.isVisible = false;
         this.getUsers();
+      })
+    },
+    deleteItem(item) {
+      axios.delete(endpoint + '/api/users/' + item.id + '/', {
+        headers: { Authorization: 'Token 4fe87c595940eb5213e1f4345fa5e63d468fd807' }
+      }).then(() => {
+        var idx = this.users.results.indexOf(item)
+        this.users.results.splice(idx, 1)
       })
     }
   }
