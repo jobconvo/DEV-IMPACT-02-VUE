@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>CRUD Users</h1>
+    <h1>CRUD Usuários</h1>
     <br><br>
     <div class="row justify-content-md-center">
       <div class="col-md-4">
