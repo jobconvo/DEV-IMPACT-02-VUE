@@ -1,38 +1,32 @@
 <template>
-<div>
+  <div>
     <h2>Adicionar Usuários</h2>
-    
-    <form @submit.prevent="saveUser" @on:keyup.enter="submit" class="text-left" style="background-color:#f9f9f9; border: 1px dashed #ddd; padding:20px 15px; margin:10px 0;">
-    
-    <div class="form-group">
+    <form @submit.prevent="saveUser" @on:keyup.enter="submit" class="myform text-left">
+      <div class="form-group">
         <label>@Usuário</label>
-        <input class="form-control" type="text" v-model="user.username" >
-    </div>
-    <div class="form-group">
+        <input class="form-control" type="text" v-model="user.username">
+      </div>
+      <div class="form-group">
         <label>Email</label>
-        <input class="form-control" type="email" v-model="user.email" >
-    </div>
-    <div class="form-group">
+        <input class="form-control" type="email" v-model="user.email">
+      </div>
+      <div class="form-group">
         <label>Primeiro Nome</label>
-        <input class="form-control" type="text" v-model="user.first_name" >
-    </div>
-    <div class="form-group">
+        <input class="form-control" type="text" v-model="user.first_name">
+      </div>
+      <div class="form-group">
         <label>Sobrenome</label>
-        <input class="form-control" type="text" v-model="user.last_name" >
-    </div>
-
-    <button type="submit" class="btn btn-sm btn-success">Confirmar</button>
-
+        <input class="form-control" type="text" v-model="user.last_name">
+      </div>
+      <button type="submit" class="btn btn-sm btn-success">Confirmar</button>
     </form>
-
-</div>
+  </div>
 </template>
-  
-
 
 <script>
-
 import { eventBus } from '../../main';
+
+const endpoint = 'http://127.0.0.1:8000'
 
 // https://github.com/axios/axios
 import axios from 'axios'
@@ -52,26 +46,31 @@ export default {
   },
   methods: {
     saveUser() {
-      
+
       var data = {
-          username: this.user.username,
-          email: this.user.email,
-          first_name: this.user.first_name,
-          last_name: this.user.last_name,
+        username: this.user.username,
+        email: this.user.email,
+        first_name: this.user.first_name,
+        last_name: this.user.last_name,
       };
-      
-      axios.post('http://127.0.0.1:8000/api/users/create/', data, 
-        {
-          headers: { Authorization: 'Token 2071314e58a47390b04990ac8f81e0d2090290a3' }
-        }
-      ).then((response) => {
+
+      axios.post(endpoint + '/api/users/create/', data, {
+        headers: { Authorization: 'Token 2071314e58a47390b04990ac8f81e0d2090290a3' }
+      }).then((response) => {
         // enviando dados para outros components
         eventBus.$emit('submit', response.data);
-        
+
       })
     },
   }
 }
-
-
 </script>
+
+<style>
+  .myform {
+    background-color: #f9f9f9;
+    border: 1px dashed #ddd;
+    padding: 20px 15px;
+    margin: 10px 0;
+  }
+</style>

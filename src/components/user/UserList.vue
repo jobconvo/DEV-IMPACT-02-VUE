@@ -27,12 +27,11 @@
     </div>
   </div>
 </template>
-  
-
 
 <script>
-
 import { eventBus } from '../../main';
+
+const endpoint = 'http://127.0.0.1:8000'
 
 // https://github.com/axios/axios
 import axios from 'axios'
@@ -50,18 +49,15 @@ export default {
     var vm = this;
     // recebendo dados de outros componentes
     eventBus.$on('submit', function(response) {
-      console.log(response);
       vm.users.results.push(response);
     })
   },
   methods: {
     getUsers: async function() {
-      axios.get('http://127.0.0.1:8000/api/users/create/').then((response) => {
+      axios.get(endpoint + '/api/users/create/').then((response) => {
         this.users = response.data;
-          
       })
     },
   }
 }
-
 </script>
