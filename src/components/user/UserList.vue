@@ -20,7 +20,7 @@
             <td>{{ item.first_name }}</td>
             <td>{{ item.last_name }}</td>
             <td>{{ item.email }}</td>
-            <td>{{ item.username }}</td>
+            <td>{{ item.email }}</td>
           </tr>
         </tbody>
       </table>
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     getUsers: async function() {
-      axios.get(endpoint + '/api/users/create/').then((response) => {
+      axios.get(endpoint + '/api/users/').then((response) => {
         this.users = response.data;
       })
     },

@@ -2,10 +2,10 @@
   <div>
     <h2>Adicionar Usuários</h2>
     <form @submit.prevent="saveUser" @on:keyup.enter="submit" class="myform text-left">
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>@Usuário</label>
         <input class="form-control" type="text" v-model="user.username">
-      </div>
+      </div> -->
       <div class="form-group">
         <label>Email</label>
         <input class="form-control" type="email" v-model="user.email">
@@ -17,6 +17,10 @@
       <div class="form-group">
         <label>Sobrenome</label>
         <input class="form-control" type="text" v-model="user.last_name">
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input class="form-control" type="password" v-model="user.password">
       </div>
       <button type="submit" class="btn btn-sm btn-success">Confirmar</button>
     </form>
@@ -37,10 +41,10 @@ export default {
   data() {
     return {
       user: {
-        username: "",
         email: "",
         first_name: "",
         last_name: "",
+        password: "",
       },
     }
   },
@@ -48,13 +52,13 @@ export default {
     saveUser() {
 
       var data = {
-        username: this.user.username,
         email: this.user.email,
         first_name: this.user.first_name,
         last_name: this.user.last_name,
+        password: this.user.password,
       };
 
-      axios.post(endpoint + '/api/users/create/', data, {
+      axios.post(endpoint + '/api/users/', data, {
         headers: { Authorization: 'Token 2071314e58a47390b04990ac8f81e0d2090290a3' }
       }).then((response) => {
         // enviando dados para outros components

@@ -27,21 +27,16 @@ npm install -g @vue/cli
 vue create hello-world
 ```
 
-### Instalando o axios
-
-O [axios](https://github.com/axios/axios) é uma lib para fazer requisições via HTTP através do browser e do node.js.
+### Instalando o [axios](https://github.com/axios/axios)
 
 ```
 npm install --save axios
 ```
 
-### Instalando o bootstrap-vue
-
-[bootstrap-vue](https://bootstrap-vue.org/)
-
+### Instalando o [bootstrap-vue](https://bootstrap-vue.org/)
 
 ```
-npm install bootstrap bootstrap-vue
+npm install --save bootstrap bootstrap-vue
 ```
 
 
