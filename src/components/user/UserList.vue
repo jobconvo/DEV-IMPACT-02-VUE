@@ -12,6 +12,7 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Username</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -21,10 +22,37 @@
             <td>{{ item.last_name }}</td>
             <td>{{ item.email }}</td>
             <td>{{ item.email }}</td>
+            <td>
+              <font-awesome-icon icon="edit" class="link" @click="editItem(item)"/>
+              <font-awesome-icon icon="trash" class="no" />
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <b-modal
+      :visible="isVisible"
+      title="Editar"
+      @ok.prevent="saveItem"
+      @hidden="clearModal"
+      cancel-title="Cancelar"
+      ok-title="Salvar"
+    >
+      <form class="myform text-left">
+        <div class="form-group">
+          <label>Email</label>
+          <input class="form-control" type="email" v-model="editingItem.email">
+        </div>
+        <div class="form-group">
+          <label>Primeiro Nome</label>
+          <input class="form-control" type="text" v-model="editingItem.first_name">
+        </div>
+        <div class="form-group">
+          <label>Sobrenome</label>
+          <input class="form-control" type="text" v-model="editingItem.last_name">
+        </div>
+      </form>
+    </b-modal>
   </div>
 </template>
 
@@ -41,6 +69,12 @@ export default {
   data() {
     return {
       users: [],
+      isVisible: false,
+      editingItem: {
+        email: '',
+        first_name: '',
+        last_name: ''
+      },
     }
   },
   created() {
@@ -58,6 +92,37 @@ export default {
         this.users = response.data;
       })
     },
+    clearModal() {
+      this.isVisible = false;
+      this.editingItem = {
+        email: '',
+        first_name: '',
+        last_name: ''
+      };
+    },
+    editItem(item) {
+      this.isVisible = true;
+      this.editingItem = { ...item };
+    },
+    saveItem() {
+      const data = { ...this.editingItem };
+      axios.put(endpoint + '/api/users/' + data.id + '/', data, {
+        headers: { Authorization: 'Token 4fe87c595940eb5213e1f4345fa5e63d468fd807' }
+      }).then(() => {
+        this.isVisible = false;
+        this.getUsers();
+      })
+    }
   }
 }
 </script>
+
+<style>
+  .link {
+    color: #0366d6
+  }
+  .no {
+    color: red;
+    margin-left: 10px;
+  }
+</style>
