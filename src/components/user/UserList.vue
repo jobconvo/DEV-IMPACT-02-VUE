@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in users.results" v-bind:key="item.id">
+          <tr v-for="item in users.results" :key="item.id">
             <td>{{ item.id }}</td>
             <td>{{ item.first_name }}</td>
             <td>{{ item.last_name }}</td>
